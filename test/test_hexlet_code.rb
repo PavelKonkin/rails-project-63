@@ -8,6 +8,6 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_it_does_something_useful
-    assert false
+    assert { 5.class.instance_of? [].class }
   end
 end

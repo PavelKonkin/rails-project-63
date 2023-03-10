@@ -12,3 +12,4 @@ gem "minitest", "~> 5.0"
 gem "rubocop", "~> 1.21", require: false
 gem "rubocop-minitest"
 gem "rubocop-rake"
+gem "minitest-power_assert"
