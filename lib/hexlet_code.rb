@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "hexlet_code/version"
-
+# Main module for project
 module HexletCode
   class Error < StandardError; end
 
