@@ -2,7 +2,7 @@
 
 #  Module for tag generation
 module Tag
-  def build(tag, **args)
+  def self.build(tag, **args)
     single_tags = %w[br image input]
     double_tags = %w[label div form]
     attr = ""

@@ -9,8 +9,8 @@ class TestHexletCode < Minitest::Test
     refute_nil ::HexletCode::VERSION
   end
 
-  def test_return_tag
-    assert { form_for("user") == "<form action=\"#\" method=\"post\"></form>" }
+  def test_should_return_tag
+    assert { form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
   end
 
   def test_should_return_tag_with_address
