@@ -2,12 +2,12 @@
 
 #  Module for tag generation
 module Tag
-  def self.build(tag, **args)
-    single_tags = %w[br image input]
-    double_tags = %w[label div form]
+  def self.build(tag, args = {})
+    single_tags = %w[br image input form]
+    double_tags = %w[label div textarea]
     attr = ""
     args.each do |key, value|
-      attr = "#{attr} #{key}=\"#{value}\""
+      attr = "#{attr} #{key}=\"#{value}\"" unless key.eql? :as
     end
     body = (yield if block_given?).to_s
     return "<#{tag}#{attr}>" if single_tags.include? tag
