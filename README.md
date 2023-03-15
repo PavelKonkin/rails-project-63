@@ -22,10 +22,12 @@ HexletCode.form_for user do |f|
 end
 ```
 result:
-# <form action="#" method="post">
+```htm
+<form action="#" method="post">
   <input name="name" type="text" value="rob">
   <input name="job" type="text" value="hexlet">
 </form>
+```
 
 User attribute can be complemented with additional options as hash
 ```ruby
@@ -35,10 +37,12 @@ HexletCode.form_for user, url: '#' do |f|
 end
 ```
 result:
-# <form action="#" method="post">
+```htm
+<form action="#" method="post">
   <input name="name" type="text" value="rob" class="user-input">
   <input name="job" type="text" value="hexlet">
 </form>
+```
 
 Type of tag for user attribute can be altered with as: option
 ```ruby
@@ -47,9 +51,11 @@ HexletCode.form_for user do |f|
 end
 ```
 result:
-# <form action="#" method="post">
+```htm
+<form action="#" method="post">
   <textarea name="job" cols="20" rows="40">hexlet</textarea>
 </form>
+```
 
 The default values could be altered
 ```ruby
@@ -58,6 +64,8 @@ HexletCode.form_for user, url: '#' do |f|
 end
 ```
 result:
-# <form action="#" method="post">
+```htm
+<form action="#" method="post">
   <textarea name="job" cols="50" rows="50">hexlet</textarea>
 </form>
+```
