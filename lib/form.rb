@@ -17,6 +17,7 @@ class Form
     when :text
       tag_hash = prepare_textarea user_attr, args
     end
+    @body << "  #{Tag.build("label", for: tag_hash[:args][:name]) { tag_hash[:args][:name].capitalize }}\n"
     @body << "  #{Tag.build(tag_hash[:type], tag_hash[:args]) { tag_hash[:block] }}\n"
   end
 
@@ -33,5 +34,9 @@ class Form
     tag_args = { name: user_attr, cols: 20, rows: 40 }.merge args
     block = @user.public_send(user_attr)
     { type: tag_type, args: tag_args, block: }
+  end
+
+  def submit(button_name = "Save")
+    @body << "  #{Tag.build("input", type: "submit", value: button_name)}\n"
   end
 end

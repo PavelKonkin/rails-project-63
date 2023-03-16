@@ -13,6 +13,7 @@ class TestHexletCode < Minitest::Test
     @form_tag_with_address = File.read("./test/fixture_should_return_form_with_address")
     @form_tag_with_custom_input = File.read("./test/fixture_should_return_form_with_custom_input")
     @form_tag_with_overrided_defaults = File.read("./test/fixture_should_return_form_with_overrided_defaults")
+    @form_with_cust_named_submit_button = File.read("./test/fixture_should_return_form_with_cust_named_submit_button")
     @user = User.new(name: "rob", job: "hexlet", gender: "male")
   end
 
@@ -36,6 +37,7 @@ class TestHexletCode < Minitest::Test
     res = form_for @user do |f|
       f.input :name
       f.input :job
+      f.submit
     end
     assert { res == @form_tag }
   end
@@ -44,6 +46,7 @@ class TestHexletCode < Minitest::Test
     res = form_for @user do |f|
       f.input :name, class: "user-input"
       f.input :job
+      f.submit
     end
     assert { res == @form_tag_with_added_attributes }
   end
@@ -52,6 +55,7 @@ class TestHexletCode < Minitest::Test
     res = form_for(@user, url: "/users") do |f|
       f.input :name
       f.input :job
+      f.submit
     end
     assert { res == @form_tag_with_address }
   end
@@ -59,6 +63,7 @@ class TestHexletCode < Minitest::Test
   def test_should_return_form_with_custom_input
     res = form_for @user do |f|
       f.input :job, as: :text
+      f.submit
     end
     assert { res == @form_tag_with_custom_input }
   end
@@ -66,6 +71,7 @@ class TestHexletCode < Minitest::Test
   def test_should_return_form_with_overrided_defaults
     res = form_for @user do |f|
       f.input :job, as: :text, rows: 50, cols: 50
+      f.submit
     end
     assert { res == @form_tag_with_overrided_defaults }
   end
@@ -73,6 +79,16 @@ class TestHexletCode < Minitest::Test
   def test_should_raise_error
     assert_raises form_for @user do |f|
       f.input :age
+      f.submit
     end
+  end
+
+  def test_should_return_form_with_custom_named_submit_button
+    res = form_for @user do |f|
+      f.input :name
+      f.input :job
+      f.submit "Send"
+    end
+    assert { res == @form_with_cust_named_submit_button }
   end
 end
