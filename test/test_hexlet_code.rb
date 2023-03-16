@@ -4,9 +4,7 @@ require "test_helper"
 
 # Class for tests
 class TestHexletCode < Minitest::Test
-  include HexletCode
   User = Struct.new(:name, :job, :gender, keyword_init: true)
-
   def setup
     @form_tag = File.read("./test/fixture_should_return_form")
     @form_tag_with_added_attributes = File.read("./test/fixture_should_return_form_with_added_attributes")
@@ -22,19 +20,19 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_tag
-    assert { form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
+    assert { HexletCode.form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
   end
 
   def test_should_return_tag_with_address
-    assert { form_for "user", url: "/users" == "<form action=\"/users\" method=\"post\"></form>" }
+    assert { HexletCode.form_for "user", url: "/users" == "<form action=\"/users\" method=\"post\"></form>" }
   end
 
   def test_should_return_tag_whith_default_action
-    assert { form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
+    assert { HexletCode.form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
   end
 
   def test_should_return_form
-    res = form_for @user do |f|
+    res = HexletCode.form_for @user do |f|
       f.input :name
       f.input :job
       f.submit
@@ -43,7 +41,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_form_with_added_attributes
-    res = form_for @user do |f|
+    res = HexletCode.form_for @user do |f|
       f.input :name, class: "user-input"
       f.input :job
       f.submit
@@ -52,7 +50,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_form_with_address
-    res = form_for(@user, url: "/users") do |f|
+    res = HexletCode.form_for(@user, url: "/users") do |f|
       f.input :name
       f.input :job
       f.submit
@@ -61,7 +59,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_form_with_custom_input
-    res = form_for @user do |f|
+    res = HexletCode.form_for @user do |f|
       f.input :job, as: :text
       f.submit
     end
@@ -69,7 +67,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_form_with_overrided_defaults
-    res = form_for @user do |f|
+    res = HexletCode.form_for @user do |f|
       f.input :job, as: :text, rows: 50, cols: 50
       f.submit
     end
@@ -77,14 +75,14 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_raise_error
-    assert_raises form_for @user do |f|
+    assert_raises HexletCode.form_for @user do |f|
       f.input :age
       f.submit
     end
   end
 
   def test_should_return_form_with_custom_named_submit_button
-    res = form_for @user do |f|
+    res = HexletCode.form_for @user do |f|
       f.input :name
       f.input :job
       f.submit "Send"

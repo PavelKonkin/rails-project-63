@@ -8,7 +8,7 @@ autoload(:Form, "./lib/form.rb")
 module HexletCode
   class Error < StandardError; end
 
-  def form_for(user, url = {})
+  def self.form_for(user, url = {})
     form = Form.new
     form.user = user
     action_value = url[:url].nil? ? "#" : url[:url]
