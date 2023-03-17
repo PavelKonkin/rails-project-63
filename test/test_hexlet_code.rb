@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require 'test_helper'
 
 # Class for tests
 class TestHexletCode < Minitest::Test
   User = Struct.new(:name, :job, :gender, keyword_init: true)
   def setup
-    @form_tag = File.read("test/fixture_should_return_form")
-    @form_tag_with_added_attributes = File.read("test/fixture_should_return_form_with_added_attributes")
-    @form_tag_with_address = File.read("test/fixture_should_return_form_with_address")
-    @form_tag_with_custom_input = File.read("test/fixture_should_return_form_with_custom_input")
-    @form_tag_with_overrided_defaults = File.read("test/fixture_should_return_form_with_overrided_defaults")
-    @form_with_cust_named_submit_button = File.read("test/fixture_should_return_form_with_cust_named_submit_button")
-    @user = User.new(name: "rob", job: "hexlet", gender: "male")
+    @form_tag = File.read('test/fixture_should_return_form')
+    @form_tag_with_added_attributes = File.read('test/fixture_should_return_form_with_added_attributes')
+    @form_tag_with_address = File.read('test/fixture_should_return_form_with_address')
+    @form_tag_with_custom_input = File.read('test/fixture_should_return_form_with_custom_input')
+    @form_tag_with_overrided_defaults = File.read('test/fixture_should_return_form_with_overrided_defaults')
+    @form_with_cust_named_submit_button = File.read('test/fixture_should_return_form_with_cust_named_submit_button')
+    @user = User.new(name: 'rob', job: 'hexlet', gender: 'male')
   end
 
   def test_that_it_has_a_version_number
@@ -20,15 +20,15 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_tag
-    assert { HexletCode.form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
+    assert { HexletCode.form_for 'user' == '<form action="#" method="post"></form>' }
   end
 
   def test_should_return_tag_with_address
-    assert { HexletCode.form_for "user", url: "/users" == "<form action=\"/users\" method=\"post\"></form>" }
+    assert { HexletCode.form_for 'user', url: '/users' == '<form action="/users" method="post"></form>' }
   end
 
   def test_should_return_tag_whith_default_action
-    assert { HexletCode.form_for "user" == "<form action=\"#\" method=\"post\"></form>" }
+    assert { HexletCode.form_for 'user' == '<form action="#" method="post"></form>' }
   end
 
   def test_should_return_form
@@ -42,7 +42,7 @@ class TestHexletCode < Minitest::Test
 
   def test_should_return_form_with_added_attributes
     res = HexletCode.form_for @user do |f|
-      f.input :name, class: "user-input"
+      f.input :name, class: 'user-input'
       f.input :job
       f.submit
     end
@@ -50,7 +50,7 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_form_with_address
-    res = HexletCode.form_for(@user, url: "/users") do |f|
+    res = HexletCode.form_for(@user, url: '/users') do |f|
       f.input :name
       f.input :job
       f.submit
@@ -85,7 +85,7 @@ class TestHexletCode < Minitest::Test
     res = HexletCode.form_for @user do |f|
       f.input :name
       f.input :job
-      f.submit "Send"
+      f.submit 'Send'
     end
     assert { res == @form_with_cust_named_submit_button }
   end

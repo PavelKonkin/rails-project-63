@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "hexlet_code/version"
-autoload(:Tag, "tag.rb")
-autoload(:Form, "form.rb")
+require_relative 'hexlet_code/version'
+autoload(:Tag, 'tag.rb')
+autoload(:Form, 'form.rb')
 
 # Main module for project
 module HexletCode

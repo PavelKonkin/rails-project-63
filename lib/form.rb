@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-autoload(:Tag, "tag.rb")
+autoload(:Tag, 'tag.rb')
 # Class for creating form object
 class Form
   attr_accessor :body, :user, :options
 
   def initialize(user, options = {}, &)
-    @body = ""
+    @body = ''
     @user = user
     options[:action] = options.delete(:url) unless options[:url].nil?
-    @options = { action: "#", method: "post", class: "hexlet-form" }.merge options
+    @options = { action: '#', method: 'post', class: 'hexlet-form' }.merge options
     @body = "#{Tag.build("form", @options)}\n"
     yield self if block_given?
     @body << "</form>\n"
@@ -27,21 +27,21 @@ class Form
   end
 
   def prepare_input(user_attr, args)
-    tag_type = "input"
-    tag_args = { name: user_attr, type: "text", value: @user.public_send(user_attr) }.merge args
-    block = ""
+    tag_type = 'input'
+    tag_args = { name: user_attr, type: 'text', value: @user.public_send(user_attr) }.merge args
+    block = ''
     { type: tag_type, args: tag_args, block: }
   end
 
   def prepare_textarea(user_attr, args)
     args.delete :as
-    tag_type = "textarea"
+    tag_type = 'textarea'
     tag_args = { name: user_attr, cols: 20, rows: 40 }.merge args
     block = @user.public_send(user_attr)
     { type: tag_type, args: tag_args, block: }
   end
 
-  def submit(button_name = "Save")
+  def submit(button_name = 'Save')
     @body << "  #{Tag.build("input", type: "submit", value: button_name)}\n"
   end
 end
