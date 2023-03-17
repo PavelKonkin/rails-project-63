@@ -10,7 +10,7 @@ class Form
     @user = user
     options[:action] = options.delete(:url) unless options[:url].nil?
     @options = { action: '#', method: 'post', class: 'hexlet-form' }.merge options
-    @body = "#{Tag.build("form", @options)}\n"
+    @body = "#{Tag.build('form', @options)}\n"
     yield self if block_given?
     @body << "</form>\n"
   end
@@ -22,7 +22,7 @@ class Form
     when :text
       tag_hash = prepare_textarea user_attr, args
     end
-    @body << "  #{Tag.build("label", for: tag_hash[:args][:name]) { tag_hash[:args][:name].capitalize }}\n"
+    @body << "  #{Tag.build('label', for: tag_hash[:args][:name]) { tag_hash[:args][:name].capitalize }}\n"
     @body << "  #{Tag.build(tag_hash[:type], tag_hash[:args]) { tag_hash[:block] }}\n"
   end
 
@@ -42,6 +42,6 @@ class Form
   end
 
   def submit(button_name = 'Save')
-    @body << "  #{Tag.build("input", type: "submit", value: button_name)}\n"
+    @body << "  #{Tag.build('input', type: 'submit', value: button_name)}\n"
   end
 end
