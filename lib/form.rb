@@ -3,11 +3,16 @@
 autoload(:Tag, "tag.rb")
 # Class for creating form object
 class Form
-  attr_accessor :body, :user
+  attr_accessor :body, :user, :options
 
-  def initialize
+  def initialize(user, options = {}, &)
     @body = ""
-    @user = ""
+    @user = user
+    options[:action] = options.delete(:url) unless options[:url].nil?
+    @options = { action: "#", method: "post", class: "hexlet-form" }.merge options
+    @body = "#{Tag.build("form", @options)}\n"
+    yield self if block_given?
+    @body << "</form>\n"
   end
 
   def input(user_attr, **args)
