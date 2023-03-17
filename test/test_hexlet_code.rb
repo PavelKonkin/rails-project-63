@@ -6,12 +6,12 @@ require "test_helper"
 class TestHexletCode < Minitest::Test
   User = Struct.new(:name, :job, :gender, keyword_init: true)
   def setup
-    @form_tag = File.read("./test/fixture_should_return_form")
-    @form_tag_with_added_attributes = File.read("./test/fixture_should_return_form_with_added_attributes")
-    @form_tag_with_address = File.read("./test/fixture_should_return_form_with_address")
-    @form_tag_with_custom_input = File.read("./test/fixture_should_return_form_with_custom_input")
-    @form_tag_with_overrided_defaults = File.read("./test/fixture_should_return_form_with_overrided_defaults")
-    @form_with_cust_named_submit_button = File.read("./test/fixture_should_return_form_with_cust_named_submit_button")
+    @form_tag = File.read("test/fixture_should_return_form")
+    @form_tag_with_added_attributes = File.read("test/fixture_should_return_form_with_added_attributes")
+    @form_tag_with_address = File.read("test/fixture_should_return_form_with_address")
+    @form_tag_with_custom_input = File.read("test/fixture_should_return_form_with_custom_input")
+    @form_tag_with_overrided_defaults = File.read("test/fixture_should_return_form_with_overrided_defaults")
+    @form_with_cust_named_submit_button = File.read("test/fixture_should_return_form_with_cust_named_submit_button")
     @user = User.new(name: "rob", job: "hexlet", gender: "male")
   end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-autoload(:Tag, "./lib/tag.rb")
+autoload(:Tag, "tag.rb")
 # Class for creating form object
 class Form
   attr_accessor :body, :user
