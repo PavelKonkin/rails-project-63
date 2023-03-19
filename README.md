@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/PavelKonkin/rails-project-63/workflows/hexlet-check/badge.svg)](https://github.com/PavelKonkin/rails-project-63/actions)
 
 ### CI status
-[![CI Status](https://github.com/PavelKonkin/rails-project-63/workflows/main/badge.svg)](https://github.com/PavelKonkin/rails-project-63/actions)
+![CI Status](https://github.com/PavelKonkin/rails-project-63/actions/workflows/main.yml/badge.svg)
 
 ### Usage
 
