@@ -6,12 +6,6 @@ require 'test_helper'
 class TestHexletCode < Minitest::Test
   User = Struct.new(:name, :job, :gender, keyword_init: true)
   def setup
-    @form_tag = File.read('test/fixture_should_return_form')
-    @form_tag_with_added_attributes = File.read('test/fixture_should_return_form_with_added_attributes')
-    @form_tag_with_address = File.read('test/fixture_should_return_form_with_address')
-    @form_tag_with_custom_input = File.read('test/fixture_should_return_form_with_custom_input')
-    @form_tag_with_overrided_defaults = File.read('test/fixture_should_return_form_with_overrided_defaults')
-    @form_with_cust_named_submit_button = File.read('test/fixture_should_return_form_with_cust_named_submit_button')
     @user = User.new(name: 'rob', job: 'hexlet', gender: 'male')
   end
 
@@ -37,7 +31,7 @@ class TestHexletCode < Minitest::Test
       f.input :job
       f.submit
     end
-    assert { res == @form_tag }
+    assert { res == get_fixture(name) }
   end
 
   def test_should_return_form_with_added_attributes
@@ -46,7 +40,7 @@ class TestHexletCode < Minitest::Test
       f.input :job
       f.submit
     end
-    assert { res == @form_tag_with_added_attributes }
+    assert { res == get_fixture(name) }
   end
 
   def test_should_return_form_with_address
@@ -55,7 +49,7 @@ class TestHexletCode < Minitest::Test
       f.input :job
       f.submit
     end
-    assert { res == @form_tag_with_address }
+    assert { res == get_fixture(name) }
   end
 
   def test_should_return_form_with_custom_input
@@ -63,7 +57,7 @@ class TestHexletCode < Minitest::Test
       f.input :job, as: :text
       f.submit
     end
-    assert { res == @form_tag_with_custom_input }
+    assert { res == get_fixture(name) }
   end
 
   def test_should_return_form_with_overrided_defaults
@@ -71,7 +65,7 @@ class TestHexletCode < Minitest::Test
       f.input :job, as: :text, rows: 50, cols: 50
       f.submit
     end
-    assert { res == @form_tag_with_overrided_defaults }
+    assert { res == get_fixture(name) }
   end
 
   def test_should_raise_error
@@ -81,12 +75,16 @@ class TestHexletCode < Minitest::Test
     end
   end
 
-  def test_should_return_form_with_custom_named_submit_button
+  def test_should_return_form_with_cust_named_submit_button
     res = HexletCode.form_for @user do |f|
       f.input :name
       f.input :job
       f.submit 'Send'
     end
-    assert { res == @form_with_cust_named_submit_button }
+    assert { res == get_fixture(name) }
+  end
+
+  def get_fixture(test_name)
+    File.read("test/fixtures/#{test_name.sub('test_', 'fixture_')}.html")
   end
 end
