@@ -14,15 +14,15 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_should_return_tag
-    assert { HexletCode.form_for 'user' == '<form action="#" method="post"></form>' }
+    assert { HexletCode.form_for @user == '<form action="#" method="post"></form>' }
   end
 
   def test_should_return_tag_with_address
-    assert { HexletCode.form_for 'user', url: '/users' == '<form action="/users" method="post"></form>' }
+    assert { HexletCode.form_for @user, url: '/users' == '<form action="/users" method="post"></form>' }
   end
 
   def test_should_return_tag_whith_default_action
-    assert { HexletCode.form_for 'user' == '<form action="#" method="post"></form>' }
+    assert { HexletCode.form_for @user == '<form action="#" method="post"></form>' }
   end
 
   def test_should_return_form
