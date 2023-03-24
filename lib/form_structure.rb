@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Class for creating form structure
 class FormStructure
   attr_reader :scheme
 
@@ -14,21 +13,26 @@ class FormStructure
 
   def input(user_attr, options = {})
     @scheme[:tag_list] << LabelTag.new(user_attr)
-    case options[:as]
-    when nil
-      @scheme[:tag_list] << InputTag.new(user_attr, @user, options)
-    when :text
-      options.delete :as
-      @scheme[:tag_list] << TextAreaTag.new(user_attr, @user, options)
-    end
+    @scheme[:tag_list] << build_input_type_class(user_attr, @user, options)
   end
 
   def submit(name = 'Save')
     @scheme[:tag_list] << SubmitTag.new(name)
   end
+
+  private
+
+  def build_input_type_class(user_attr, user, options)
+    case options[:as]
+    when :text
+      options.delete :as
+      TextAreaTag.new(user_attr, user, options)
+    else
+      InputTag.new(user_attr, user, options)
+    end
+  end
 end
 
-# Class for input tag scheme
 class InputTag
   attr_reader :scheme
 
@@ -37,7 +41,6 @@ class InputTag
   end
 end
 
-# Class for input tag textarea
 class TextAreaTag
   attr_reader :scheme
 
@@ -47,7 +50,6 @@ class TextAreaTag
   end
 end
 
-# Class for input tag label
 class LabelTag
   attr_reader :scheme
 
@@ -56,7 +58,6 @@ class LabelTag
   end
 end
 
-# Class for input tag submit
 class SubmitTag
   attr_reader :scheme
 
