@@ -11,7 +11,7 @@ class FormStructure
     yield self if block_given?
   end
 
-  def input(user_attr, options = {})
+  def input(user_attr, options = { as: :default })
     @scheme[:tag_list] << LabelTag.new(user_attr)
     @scheme[:tag_list] << build_input_type_class(user_attr, @user, options)
   end
@@ -23,9 +23,9 @@ class FormStructure
   private
 
   def build_input_type_class(user_attr, user, options)
-    case options[:as]
+    as_option_value = options.delete :as
+    case as_option_value
     when :text
-      options.delete :as
       TextAreaTag.new(user_attr, user, options)
     else
       InputTag.new(user_attr, user, options)
