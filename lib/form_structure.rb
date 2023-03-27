@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require 'active_support/inflector'
+
 class FormStructure
+  include ActiveSupport::Inflector
   attr_reader :scheme
 
   def initialize(user, options = {}, &)
@@ -11,9 +14,10 @@ class FormStructure
     yield self if block_given?
   end
 
-  def input(user_attr, options = { as: :default })
+  def input(user_attr, options = {})
+    tag_options = { as: :input }.merge options
     @scheme[:tag_list] << LabelTag.new(user_attr)
-    @scheme[:tag_list] << build_input_type_class(user_attr, @user, options)
+    @scheme[:tag_list] << build_input_type_class(user_attr, @user, tag_options)
   end
 
   def submit(name = 'Save')
@@ -23,13 +27,8 @@ class FormStructure
   private
 
   def build_input_type_class(user_attr, user, options)
-    as_option_value = options.delete :as
-    case as_option_value
-    when :text
-      TextAreaTag.new(user_attr, user, options)
-    else
-      InputTag.new(user_attr, user, options)
-    end
+    input_options = options.filter { |key| key != :as }
+    "#{options[:as].capitalize}Tag".constantize.new(user_attr, user, input_options)
   end
 end
 
@@ -41,7 +40,7 @@ class InputTag
   end
 end
 
-class TextAreaTag
+class TextTag
   attr_reader :scheme
 
   def initialize(user_attr, user, options = {})
