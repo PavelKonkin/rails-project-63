@@ -16,6 +16,4 @@ Layout/LineLength:
 Style/Documentation:
   Enabled: false
 
-Naming/BlockForwarding: 
-  EnforcedStyle: explicit
   

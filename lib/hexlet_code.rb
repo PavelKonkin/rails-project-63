@@ -9,8 +9,8 @@ module HexletCode
 
   class Error < StandardError; end
 
-  def self.form_for(user, options = {}, &block)
-    form_structure = FormStructure.new(user, options, &block)
+  def self.form_for(user, options = {}, &)
+    form_structure = FormStructure.new(user, options, &)
     form = Form.new(form_structure)
     form.body
   end
